@@ -8,6 +8,8 @@ WORKDIR /app
 
 COPY go.mod .
 COPY go.sum .
+
+RUN go env -w GOPROXY=https://goproxy.cn,direct
 RUN go mod download
 
 COPY *.go ./
@@ -18,7 +20,7 @@ RUN go build -o /docker-gs-ping
 ## Deploy
 ##
 
-FROM gcr.io/distroless/base-debian10
+FROM gcr.lank8s.cn/distroless/base-debian10
 
 WORKDIR /
 
